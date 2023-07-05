@@ -10,6 +10,15 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount = () => {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    this.setState({ contacts });
+  };
+
+  componentDidUpdate = () => {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  };
+
   formSubmitHandler = newContact => {
     const matchedContact = this.state.contacts.find(
       ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
